@@ -1,0 +1,49 @@
+name: Build low_cherry STLs
+
+on:
+  push:
+    branches:
+      - claude/add-low-cherry-profile-6OEoh
+    paths:
+      - 'keys.scad'
+      - 'includes.scad'
+      - 'src/**'
+      - '.github/workflows/low_cherry_stls.yml'
+  pull_request:
+    paths:
+      - 'keys.scad'
+      - 'includes.scad'
+      - 'src/**'
+      - '.github/workflows/low_cherry_stls.yml'
+  workflow_dispatch:
+
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        row: [1, 2, 3, 4]
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install OpenSCAD
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends openscad xvfb
+
+      - name: Render row ${{ matrix.row }}
+        run: |
+          mkdir -p stl
+          xvfb-run -a openscad \
+            --enable=function-literals \
+            -D "row=${{ matrix.row }}" \
+            -o "stl/low_cherry_row${{ matrix.row }}.stl" \
+            keys.scad
+
+      - name: Upload STL artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: low_cherry_row${{ matrix.row }}
+          path: stl/low_cherry_row${{ matrix.row }}.stl
+          if-no-files-found: error

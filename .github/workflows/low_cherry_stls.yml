@@ -27,16 +27,16 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Install OpenSCAD
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y --no-install-recommends openscad xvfb
+      - name: Install OpenSCAD nightly
+        # the apt-packaged openscad is 2021.01 and rejects `--enable=function-literals`,
+        # which the codebase needs (settings.scad uses function literals). The nightly
+        # snap supports them out of the box.
+        run: sudo snap install openscad-nightly
 
       - name: Render row ${{ matrix.row }}
         run: |
           mkdir -p stl
-          xvfb-run -a openscad \
-            --enable=function-literals \
+          openscad-nightly \
             -D "row=${{ matrix.row }}" \
             -o "stl/low_cherry_row${{ matrix.row }}.stl" \
             keys.scad

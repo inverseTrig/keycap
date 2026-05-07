@@ -103,9 +103,10 @@ module alps(slop = undef) {
   children();
 }
 
-module rounded_cherry(slop = undef) {
+module rounded_cherry(slop = undef, offset = undef) {
   $stem_slop = slop != undef ? slop : $stem_slop;
   $stem_type = "rounded_cherry";
+  $rounded_cherry_offset = offset != undef ? offset : $rounded_cherry_offset;
   children();
 }
 

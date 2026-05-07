@@ -12,8 +12,10 @@ include <../settings.scad>
 //
 // Differences vs DSA:
 //   - flat top (no spherical dish)
-//   - stem inset 1mm from the keycap bottom (matches real DSA caps);
-//     $stem_inset only shortens the stem, $total_depth is unchanged
+//   - rounded_cherry stem raised 1mm via $rounded_cherry_offset so it sits
+//     slightly inside the keycap (matches real DSA caps). We deliberately
+//     do NOT use $stem_inset, because $stem_inset is also fed into envelope()
+//     which clips the bottom of the outer keycap.
 //   - $stem_throw left at its default so the +-cross cutout depth is
 //     preserved even though the stem is shorter
 module dsa_v2_row(row=3, column = 0) {
@@ -33,12 +35,12 @@ module dsa_v2_row(row=3, column = 0) {
   // 1.0mm walls (vs DSA's 1.5mm) to widen the inner cavity for Choc V2
   $wall_thickness = 2.0;
 
-  // Raise the stem 1mm above the keycap floor without altering $total_depth.
-  // stem_height() = $total_depth - $dish_depth - $stem_inset, and stems are
-  // translated up by $stem_inset, so the stem top still meets the keytop
-  // underside; only the bottom is recessed. The cross cutout uses $stem_throw
-  // (unchanged) so its depth stays the same as a standard cherry stem.
-  $stem_inset = 1;
+  // Raise the rounded_cherry stem 1mm above the keycap floor without altering
+  // the outer shape. Handled inside rounded_cherry_stem: the cylinder is
+  // translated up and shortened by the same amount, so the stem top still
+  // meets the keytop underside. $stem_throw is unchanged so the cross cutout
+  // depth stays the same as a standard cherry stem.
+  $rounded_cherry_offset = 1;
 
   $side_sculpting = function(progress) (1 - progress) * 4.5;
   $corner_sculpting = function(progress) pow(progress, 2);

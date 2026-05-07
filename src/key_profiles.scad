@@ -13,6 +13,7 @@ include <key_profiles/mt3.scad>
 include <key_profiles/grid.scad>
 include <key_profiles/regular_polygon.scad>
 include <key_profiles/cherry.scad>
+include <key_profiles/low_cherry.scad>
 include <key_profiles/dss.scad>
 include <key_profiles/asa.scad>
 include <key_profiles/typewriter.scad>
@@ -50,6 +51,8 @@ module key_profile(key_profile_type, row, column=0) {
     octagonal_row(row, column) children();
   } else if (key_profile_type == "cherry") {
     cherry_row(row, column) children();
+  } else if (key_profile_type == "low_cherry") {
+    low_cherry_row(row, column) children();
   } else if (key_profile_type == "mt3") {
     mt3_row(row, column) children();  
   } else if (key_profile_type == "disable") {

@@ -5,6 +5,7 @@
 include <key_profiles/dcs.scad>
 include <key_profiles/oem.scad>
 include <key_profiles/dsa.scad>
+include <key_profiles/dsa_v2.scad>
 include <key_profiles/sa.scad>
 include <key_profiles/g20.scad>
 include <key_profiles/hipro.scad>
@@ -25,6 +26,8 @@ module key_profile(key_profile_type, row, column=0) {
     oem_row(row, column) children();
   } else if (key_profile_type == "dsa") {
     dsa_row(row, column) children();
+  } else if (key_profile_type == "dsa_v2") {
+    dsa_v2_row(row, column) children();
   } else if (key_profile_type == "dss") {
     dss_row(row, column) children();
   } else if (key_profile_type == "sa") {

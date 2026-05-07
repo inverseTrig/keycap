@@ -31,6 +31,7 @@ module dsa_v2_row(row=3, column = 0) {
   $dish_skew_x = 0;
   $dish_skew_y = 0;
   $height_slices = 10;
+  $stem_support_type = "disabled";
 
   // 1.0mm walls (vs DSA's 1.5mm) to widen the inner cavity for Choc V2
   $wall_thickness = 2.0;

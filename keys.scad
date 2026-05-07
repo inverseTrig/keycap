@@ -11,6 +11,9 @@ include <./includes.scad>
 // example key
 dcs_row(5) legend("⇪", size=9) key();
 
+// DSA v2: same exterior as DSA, wider inner cavity for Kailh Choc V2 switches
+/* dsa_v2_row(3) choc() key(); */
+
 // example row
 /* for (x = [0:1:4]) {
   translate_u(0,-x) dcs_row(x) key();

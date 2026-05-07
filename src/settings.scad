@@ -71,6 +71,12 @@ $stem_throw = 4;
 // Diameter of the outside of the rounded cherry stem
 $rounded_cherry_stem_d = 5.5;
 
+// Vertical offset of the rounded cherry stem from the bottom of the keycap.
+// Unlike $stem_inset, this only shortens & raises the stem itself, leaving
+// the outer keycap shape (and $total_depth) untouched. The +-cross cutout
+// depth still uses $stem_throw, so the switch engagement length is preserved.
+$rounded_cherry_offset = 0;
+
 
 // How much higher the stem is than the bottom of the keycap.
 // Inset stem requires support but is more accurate in some profiles

@@ -18,6 +18,9 @@ include <../settings.scad>
 //     which clips the bottom of the outer keycap.
 //   - $stem_throw left at its default so the +-cross cutout depth is
 //     preserved even though the stem is shorter
+//   - low profile: $total_depth lowered from DSA's 8.1mm to 6.0mm. The
+//     floor is offset(1) + stem_throw(4) + keytop_thickness(1) = 6mm; any
+//     lower and the cross cutout would punch through the keytop.
 module dsa_v2_row(row=3, column = 0) {
   $key_shape_type = "sculpted_square";
   $bottom_key_width = 18.24;
@@ -54,19 +57,19 @@ module dsa_v2_row(row=3, column = 0) {
 
   depth_raisers = [0, 3.5, 1, 0, 1, 3];
   if (row < 1 || row > 4) {
-    $total_depth = 8.1 + depth_raisers[row] + extra_height;
+    $total_depth = 6.0 + depth_raisers[row] + extra_height;
     children();
   } else if (row == 1) {
-    $total_depth = 8.1 + depth_raisers[row] + extra_height;
+    $total_depth = 6.0 + depth_raisers[row] + extra_height;
     children();
   } else if (row == 2) {
-    $total_depth = 8.1 + depth_raisers[row] + extra_height;
+    $total_depth = 6.0 + depth_raisers[row] + extra_height;
     children();
   } else if (row == 3) {
-    $total_depth = 8.1 + depth_raisers[row] + extra_height;
+    $total_depth = 6.0 + depth_raisers[row] + extra_height;
     children();
   } else if (row == 4) {
-    $total_depth = 8.1 + depth_raisers[row] + extra_height;
+    $total_depth = 6.0 + depth_raisers[row] + extra_height;
     children();
   } else {
     children();
